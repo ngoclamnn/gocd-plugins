@@ -35,16 +35,16 @@ public class SonarTaskExecutor extends TaskExecutor {
 
             SonarClient sonarClient = new SonarClient(sonarApiUrl);
 
-//            // This might need some auth!
-//            Map envVars = context.getEnvironmentVariables();
-//            if (envVars.get(GoApiConstants.ENVVAR_NAME_SONAR_USER) != null &&
-//                    envVars.get(GoApiConstants.ENVVAR_NAME_SONAR_USER_PASSWORD) != null) {
-//
-//                sonarClient.setBasicAuthentication(envVars.get(GoApiConstants.ENVVAR_NAME_SONAR_USER).toString(), envVars.get(GoApiConstants.ENVVAR_NAME_SONAR_USER_PASSWORD).toString());
-//                log("Logged in as '" + envVars.get(GoApiConstants.ENVVAR_NAME_SONAR_USER).toString() + "' to get the project's quality gate");
-//            } else {
-//                log(" Requesting project's quality gate anonymously.");
-//            }
+           // This might need some auth!
+           Map envVars = context.getEnvironmentVariables();
+            if (envVars.get(GoApiConstants.ENVVAR_NAME_GO_BUILD_USER) != null &&
+                   envVars.get(GoApiConstants.ENVVAR_NAME_GO_BUILD_USER_PASSWORD) != null) {
+
+                sonarClient.setBasicAuthentication(envVars.get(GoApiConstants.ENVVAR_NAME_GO_BUILD_USER).toString(), envVars.get(GoApiConstants.ENVVAR_NAME_GO_BUILD_USER).toString());
+               log("Logged in as '" + envVars.get(GoApiConstants.ENVVAR_NAME_GO_BUILD_USER_PASSWORD).toString() + "' to get the project's quality gate");
+            } else {
+                log(" Requesting project's quality gate anonymously.");
+            }
 
             //get quality gate details
             JSONObject result = sonarClient.getProjectWithQualityGateDetails(sonarProjectKey);
@@ -56,10 +56,7 @@ public class SonarTaskExecutor extends TaskExecutor {
             String lastVersion = (String) lastPeriod.get("parameter");
 
             if (!("".equals(stageName)) && !("".equals(jobName)) && !("".equals(jobCounter))) {
-                String scheduledTime = getScheduledTime();
-
-                
-
+                String scheduledTime = getScheduledTime();            
                 String resultDate = lastDate;
                 resultDate = new StringBuilder(resultDate).insert(resultDate.length()-2, ":").toString();
 

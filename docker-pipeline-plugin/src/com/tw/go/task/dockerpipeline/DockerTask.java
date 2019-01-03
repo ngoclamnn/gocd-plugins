@@ -6,7 +6,7 @@ import com.thoughtworks.go.plugin.api.annotation.Extension;
 import com.thoughtworks.go.plugin.api.logging.Logger;
 import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
-import com.tw.go.plugin.common.*;;
+import com.tw.go.plugin.common.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
